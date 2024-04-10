@@ -17,6 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'home',
+  title:"Freshcart",
         loadComponent: () =>
           import('./components/home/home.component').then(
             (m) => m.HomeComponent
@@ -24,6 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'products',
+        title:"products",
         loadComponent: () =>
           import('./components/products/products.component').then(
             (m) => m.ProductsComponent
@@ -31,6 +33,7 @@ const routes: Routes = [
       },
       {
         path: 'details/:id',
+        title:"details",
         loadComponent: () =>
           import('./components/details/details.component').then(
             (m) => m.DetailsComponent
@@ -38,6 +41,7 @@ const routes: Routes = [
       },
       {
         path: 'brands',
+        title:"brands",
         loadComponent: () =>
           import('./components/brands/brands.component').then(
             (m) => m.BrandsComponent
@@ -45,6 +49,7 @@ const routes: Routes = [
       },
       {
         path: 'categories',
+        title:"categories",
         loadComponent: () =>
           import('./components/categories/categories.component').then(
             (m) => m.CategoriesComponent
@@ -52,6 +57,7 @@ const routes: Routes = [
       },
       {
         path: 'cart',
+        title:"cart",
         loadComponent: () =>
           import('./components/cart/cart.component').then(
             (m) => m.CartComponent
@@ -59,6 +65,7 @@ const routes: Routes = [
       },
       {
         path: 'checkout/:id',
+        title:"checkout",
         loadComponent: () =>
           import('./components/checkout/checkout.component').then(
             (m) => m.CheckoutComponent
@@ -66,6 +73,7 @@ const routes: Routes = [
       },
       {
         path: 'setting',
+        title:"setting",
         loadComponent: () =>
           import('./components/setting/setting.component').then(
             (m) => m.SettingComponent
@@ -73,6 +81,7 @@ const routes: Routes = [
       },
       {
         path: 'allorders',
+        title:"orders",
         loadComponent: () =>
           import('./components/allorders/allorders.component').then(
             (m) => m.AllordersComponent
@@ -80,6 +89,7 @@ const routes: Routes = [
       },
       {
         path: 'wishlist',
+        title:"wishlist",
         loadComponent: () =>
           import('./components/wishlist/wishlist.component').then(
             (m) => m.WishlistComponent
@@ -101,6 +111,7 @@ const routes: Routes = [
       },
       {
         path: 'login',
+        title:"login",
         loadComponent: () =>
           import('./components/login/login.component').then(
             (m) => m.LoginComponent
@@ -108,6 +119,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
+        title:"register",
         loadComponent: () =>
           import('./components/register/register.component').then(
             (m) => m.RegisterComponent
@@ -115,6 +127,7 @@ const routes: Routes = [
       },
       {
         path: 'forgetpassword',
+        title:"forgetPassword",
         loadComponent: () =>
           import('./components/forgetpassword/forgetpassword.component').then(
             (m) => m.ForgetpasswordComponent
@@ -124,6 +137,7 @@ const routes: Routes = [
   },
   {
     path: '**',
+    title:"404",
     loadComponent: () =>
       import('./components/notfound/notfound.component').then(
         (m) => m.NotfoundComponent
