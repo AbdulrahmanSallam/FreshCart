@@ -37,7 +37,7 @@
                 <span>{{productInfo.ratingsAverage}}</span>
               </div>
             </div>
-            <button class="main-btn d-block w-100 mt-2" (click)="addToCart(productInfo.id)">Add to cart</button>
+            <button #btn class="main-btn d-block w-100 mt-2" (click)="addToCart(productInfo.id,btn)">Add to cart</button>
           </div>
         </div>
       </div>

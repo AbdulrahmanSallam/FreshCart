@@ -1,6 +1,6 @@
-<section class="my-2 bg-main-light rounded-2" *ngIf="allOrders.length;else empty">
-  <div *ngFor="let order of allOrders" class="border-bottom border-2 p-3">
-    <header class="mx-auto text-center w-25 ">
+<section class="bg-main-light rounded-2" *ngIf="allOrders.length;else empty">
+  <div *ngFor="let order of allOrders" class="border-bottom border-2 p-4">
+    <header class="text-center ">
       <h2 class="head">Order</h2>
       <span class="text-main fw-bold">{{order.paidAt|date}}</span>
     </header>

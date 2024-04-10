@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from 'src/app/core/interfaces/product';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
@@ -20,6 +20,7 @@ export class DetailsComponent {
   constructor(
     private _ProductsService: ProductsService,
     private _ActivatedRoute: ActivatedRoute,
+    private _Renderer2: Renderer2,
     private _WishlistService: WishlistService,
     private _CartService: CartService,
     private _ToastrService: ToastrService
@@ -57,13 +58,20 @@ export class DetailsComponent {
     items: 1,
     nav: false,
   };
-  addToCart(productId: string): void {
-    this._CartService.addProductToCart(productId).subscribe({
-      next: (response: any) => {
-        this._ToastrService.success(response.message);
+  addToCart(ProductId: string, btn: HTMLButtonElement): void {
+    this._Renderer2.setAttribute(btn, 'disabled', 'true');
+    this._CartService.addProductToCart(ProductId).subscribe({
+      next: (res: any) => {
+        if (res.status == 'success') {
+          this._Renderer2.removeAttribute(btn, 'disabled');
+          this._ToastrService.success(res.message);
+          console.log(res);
+          this._CartService.cartItemsCount.next(res.numOfCartItems);
+        }
       },
       error: (err: HttpErrorResponse) => {
-        this._ToastrService.error(err.message);
+        this._Renderer2.removeAttribute(btn, 'disabled');
+        console.log('addcart', err);
       },
     });
   }
