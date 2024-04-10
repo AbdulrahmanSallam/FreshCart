@@ -1,0 +1,24 @@
+<section class="p-2 my-3" *ngIf="categories.length">
+  <div class="row g-4 mx-5 mx-sm-0">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let category of categories">
+      <div>
+        <div class="card cursor-pointer" (click)="getSubategories(category._id)">
+          <img [src]="category.image" height="250" class="w-100 card-img-top d-block" [alt]="category.name">
+          <div class=" card-body">
+            <h2 class="text-center h5">{{category.name}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-3" *ngIf="SubcategoryReady && subcategories.length">
+    <h3 class="text-main text-center py-3">Subcategory</h3>
+    <div class="row g-4">
+      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let subcategory of subcategories">
+        <div class="text-center bg-main-light p-3 rounded-4 h-100">
+          <h4 class="h6">{{subcategory.name}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<section class="py-3" *ngIf="allBrands.length">
+  <div class="text-center">
+    <h1 class="head py-4">All Brands</h1>
+  </div>
+  <div class="row g-4  mx-5 mx-sm-0">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let brand of allBrands">
+      <div class="cursor-pointer" (click)="getSpecificBrand(brand._id)" data-bs-toggle="modal" data-bs-target="#modal">
+        <div class="product card bg-main-light">
+          <div>
+            <img [src]="brand.image" class="card-img-top" [alt]="brand.name">
+          </div>
+          <div class="card-footer">
+            <h2 class="h5 text-center"> {{brand.name}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal -->
+
+  <div *ngIf="brandDetailsReady" id="modal" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body d-flex justify-content-between align-items-center">
+          <div>
+            <h4 class="text-main">{{brand.name}}</h4>
+            <p>{{brand.name.toLowerCase()}}</p>
+          </div>
+          <div>
+            <img [src]="brand.image" class="w-75 d-block ms-auto" alt="">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

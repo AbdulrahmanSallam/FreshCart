@@ -1,0 +1,42 @@
+<section class="middle-page center">
+  <div class="w-100 bg-main-light rounded p-4">
+    <div>
+      <h1 class="head">user details</h1>
+      <form [formGroup]="checkoutForm" (ngSubmit)="checkoutSubmit()">
+        <div class="mt-2">
+          <label for="details">Details :</label>
+          <textarea formControlName="details" class="form-control" id="details"></textarea>
+          <p class="text-danger small"
+            *ngIf="checkoutForm.get('details')?.getError('required') && checkoutForm.get('details')?.touched"><i
+              class="fas fa-warning"></i> Details is required
+          </p>
+        </div>
+        <div class="mt-2">
+          <label for="phone">Phone :</label>
+          <input formControlName="phone" type="tel" id="phone" class="form-control">
+          <div *ngIf="checkoutForm.get('phone')?.touched">
+            <p class="text-danger small" *ngIf="checkoutForm.get('phone')?.getError('required')"><i
+                class="fas fa-warning"></i> Phone is required
+            </p>
+            <p class="text-danger small" *ngIf="checkoutForm.get('phone')?.getError('pattern')"><i
+                class="fas fa-warning"></i> Invalid phone number
+            </p>
+          </div>
+        </div>
+        <div class="mt-2">
+          <label for="city">City :</label>
+          <input formControlName="city" type="text" id="city" class="form-control">
+          <p class="text-danger small"
+            *ngIf="checkoutForm.get('city')?.getError('required')  && checkoutForm.get('city')?.touched"><i
+              class="fas fa-warning"></i> City is required
+          </p>
+        </div>
+        <div class="mt-3">
+          <button class="main-btn d-block ms-auto">Submit</button>
+        </div>
+        <p class="alert alert-danger text-center mt-2" *ngIf="msgError">{{msgError}}</p>
+      </form>
+    </div>
+  </div>
+
+</section>

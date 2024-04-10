@@ -1,0 +1,39 @@
+<section class="my-2 bg-main-light rounded-2" *ngIf="allOrders.length;else empty">
+  <div *ngFor="let order of allOrders" class="border-bottom border-2 p-3">
+    <header class="mx-auto text-center w-25 ">
+      <h2 class="head">Order</h2>
+      <span class="text-main fw-bold">{{order.paidAt|date}}</span>
+    </header>
+    <div class="d-flex justify-content-between align-items-center mt-2">
+      <span>
+        Total order price: <span class="text-main">{{order.totalOrderPrice}}</span>
+      </span>
+      <span>
+        Count of Products: <span class="text-main">{{order.cartItems.length}}</span>
+      </span>
+    </div>
+    <div class="row g-4">
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2" *ngFor="let item of order.cartItems">
+        <div class="p-3">
+          <img [src]="item.product.imageCover" class="w-100 d-block" [alt]="item.product.title">
+        </div>
+
+        <div>
+          <h3 class="h6 text-center text-main">{{item.product.title |limitText:2 }}</h3>
+          <div class="d-flex justify-content-between align-items-center">
+            <span>Count: <span class="text-main">{{item.count}}</span></span>
+            <span>Price: <span>{{item.price * item.count}}</span></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<ng-template #empty>
+  <h2 class=" fw-bolder my-5 text-center ">
+    Must make an order first
+  </h2>
+</ng-template>

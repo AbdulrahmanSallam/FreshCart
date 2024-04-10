@@ -1,0 +1,71 @@
+<section>
+  <div class="center  bg-main-light">
+    <h1 class="head">register now</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="handleRegisteration()">
+      <div class="mb-2">
+        <label class="text-main" for="name">Name :</label>
+        <input id="name" type="text" formControlName="name" class="form-control">
+        <div class="t-2" *ngIf="registerForm.get('name')?.errors && (registerForm.get('name')?.touched)">
+          <p class="text-danger small" *ngIf="registerForm.get('name')?.getError('required')"><i
+              class="fas fa-warning"></i> Name is required</p>
+          <p class="text-danger small" *ngIf="registerForm.get('name')?.getError('minlength')"><i
+              class="fas fa-warning"></i> at least 3 characters</p>
+          <p class="text-danger small" *ngIf="registerForm.get('name')?.getError('maxlength')"><i
+              class="fas fa-warning"></i> at most 20 characters</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <label class="text-main" for="email">Email :</label>
+        <input id="email" type="email" formControlName="email" class="form-control">
+        <div *ngIf="registerForm.get('email')?.errors && (registerForm.get('email')?.touched)">
+          <p class="text-danger small" *ngIf="registerForm.get('email')?.getError('required')"><i
+              class="fas fa-warning"></i> Email is required</p>
+          <p class="text-danger small" *ngIf="registerForm.get('email')?.getError('email')"><i
+              class="fas fa-warning"></i> Invlaid email</p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <label class="text-main" for="password">Password :</label>
+        <input id="password" type="password" formControlName="password" class="form-control">
+        <div *ngIf="registerForm.get('password')?.errors && (registerForm.get('password')?.touched)">
+          <p class="text-danger small" *ngIf="registerForm.get('password')?.getError('required')"><i
+              class="fas fa-warning"></i> Password is required
+          </p>
+          <p class="text-danger small" *ngIf="registerForm.get('password')?.getError('pattern')"><i
+              class="fas fa-warning"></i> Start with capital letter, (A-Z or a-z) and numbers(0-9), 6 to 10 Characters
+          </p>
+        </div>
+      </div>
+      <div class="mb-2">
+        <label class="text-main" for="rePassword">Repassword :</label>
+        <input id="rePassword" type="password" formControlName="rePassword" class="form-control">
+        <div *ngIf="registerForm.get('rePassword')?.errors && (registerForm.get('rePassword')?.touched)">
+          <p class="text-danger small" *ngIf="registerForm.get('rePassword')?.getError('required')"><i
+              class="fas fa-warning"></i> Repassword is required</p>
+          <p class="text-danger small" *ngIf="registerForm.get('rePassword')?.getError('misMatch')"><i
+              class="fas fa-warning"></i> This value not equal to Password</p>
+        </div>
+      </div>
+      <div>
+        <label class="text-main" for="phone">Phone :</label>
+        <input id="phone" type="tel" formControlName="phone" class="form-control">
+        <div *ngIf="registerForm.get('phone')?.errors && (registerForm.get('phone')?.touched)">
+          <p class="text-danger small" *ngIf="registerForm.get('phone')?.getError('required')"><i
+              class="fas fa-warning"></i> phone is required</p>
+          <p class="text-danger small" *ngIf="registerForm.get('phone')?.getError('pattern')"><i
+              class="fas fa-warning"></i> Invalid phone number</p>
+        </div>
+      </div>
+      <div class="my-3 d-flex justify-content-between align-items-center">
+        <p class="text-danger small" *ngIf="msgErr">{{msgErr}}</p>
+        <button [disabled]="registerForm.invalid" class="main-btn d-block ms-auto"><i *ngIf="isloading"
+            class="fas fa-spinner fa-spin"></i> Register now</button>
+      </div>
+    </form>
+    <div>
+      <!-- go login -->
+      <p class="text-center">Already have an account? <span class="text-danger cursor-pointer"
+          (click)="goLoginPage()">Login</span></p>
+    </div>
+  </div>
+</section>

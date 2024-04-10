@@ -1,0 +1,14 @@
+$bg-main: #0aad0a;
+.btn {
+  border-color: $bg-main !important;
+  transition: background-color 0.5s, color 0.5s;
+  text-wrap: nowrap;
+  &:hover {
+    color: white;
+    background-color: $bg-main;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
+  }
+}

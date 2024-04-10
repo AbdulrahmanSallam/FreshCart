@@ -1,0 +1,117 @@
+<section class="middle-page" *ngIf="userData.name">
+  <div class="w-100 mx-4">
+    <div class="row g-3 p-4 flex-column-reverse flex-lg-row bg-main-light align-items-center rounded">
+      <div class="col-lg-2">
+        <div class="gap-2 d-flex justify-content-center align-items-center flex-row flex-lg-column">
+          <button class="main-btn d-block" (click)="openSection1()">Edit account</button>
+          <button class="main-btn d-block " (click)="openSection2()">Edit password</button>
+        </div>
+      </div>
+      <div class="col-lg-10" *ngIf="section1">
+        <div>
+          <h2 class="head">edit account</h2>
+          <form [formGroup]="editAccountForm" (ngSubmit)="editAccount()">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="name" class="text-main">Name :</label>
+                <div class="small"
+                  *ngIf="editAccountForm.get('name')?.errors && (editAccountForm.get('name')?.touched)">
+                  <p class="text-danger" *ngIf="editAccountForm.get('name')?.getError('required')"><i
+                      class="fas fa-warning"></i> Name is required</p>
+                  <p class="text-danger" *ngIf="editAccountForm.get('name')?.getError('minlength')"><i
+                      class="fas fa-warning"></i> at least 3 characters</p>
+                  <p class="text-danger" *ngIf="editAccountForm.get('name')?.getError('maxlength')"><i
+                      class="fas fa-warning"></i> at most 20 characters</p>
+                </div>
+              </div>
+              <input type="text" id="name" [placeholder]="userData.name" formControlName="name" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="email" class="text-main">Email :</label>
+                <div class="small"
+                  *ngIf="editAccountForm.get('email')?.errors && (editAccountForm.get('email')?.touched)">
+                  <p class="text-danger" *ngIf="editAccountForm.get('email')?.getError('required')"><i
+                      class="fas fa-warning"></i> Email is required</p>
+                  <p class="text-danger" *ngIf="editAccountForm.get('email')?.getError('email')"><i
+                      class="fas fa-warning"></i> Invalid email</p>
+                </div>
+              </div>
+              <input type="text" id="email" [placeholder]="userData.email" formControlName="email" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="phone" class="text-main">Phone :</label>
+                <div class="small"
+                  *ngIf="editAccountForm.get('phone')?.errors && (editAccountForm.get('phone')?.touched)">
+                  <p class="text-danger" *ngIf="editAccountForm.get('phone')?.getError('required')"><i
+                      class="fas fa-warning"></i> phone is required</p>
+                  <p class="text-danger" *ngIf="editAccountForm.get('phone')?.getError('pattern')"><i
+                      class="fas fa-warning"></i> Invalid phone</p>
+                </div>
+              </div>
+              <input type="text" id="phone" [placeholder]="userData.phone" formControlName="phone" class="form-control">
+            </div>
+            <div class="my-3 d-flex justify-content-between align-items-center">
+              <!-- <p class="text-danger flex-grow-1" *ngIf="msgErr">{{msgErr}}</p> -->
+              <button [disabled]="editAccountForm.invalid" class="main-btn d-block ms-auto"><i *ngIf="isLoading"
+                  class="fas fa-spinner fa-spin"></i> Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-10" *ngIf="section2">
+        <div>
+          <h2 class="head">edit password</h2>
+          <form [formGroup]="editPasswordForm" (ngSubmit)="editPassword()">
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="currentPassword" class="text-main">Current password :</label>
+                <div class="small"
+                  *ngIf="editPasswordForm.get('currentPassword')?.errors && (editPasswordForm.get('currentPassword')?.touched)">
+                  <p class="text-danger" *ngIf="editPasswordForm.get('currentPassword')?.getError('required')"><i
+                      class="fas fa-warning"></i> Current password is required</p>
+                  <p class="text-danger" *ngIf="editPasswordForm.get('currentPassword')?.getError('pattern')"><i
+                      class="fas fa-warning"></i> Incorrect password</p>
+                </div>
+              </div>
+              <input type="password" id="currentPassword" formControlName="currentPassword" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="password" class="text-main">Password :</label>
+                <div class="small"
+                  *ngIf="editPasswordForm.get('password')?.errors && (editPasswordForm.get('password')?.touched)">
+                  <p class="text-danger" *ngIf="editPasswordForm.get('password')?.getError('required')"><i
+                      class="fas fa-warning"></i> Password is required</p>
+                  <p class="text-danger" *ngIf="editPasswordForm.get('password')?.getError('pattern')"><i
+                      class="fas fa-warning"></i> Start with capital letter, (A-Z or a-z) and numbers(0-9), 6 to 10
+                    Characters</p>
+                </div>
+              </div>
+              <input type="password" id="password" formControlName="password" class="form-control">
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <label for="rePassword" class="text-main">rePassword :</label>
+                <div
+                  *ngIf="editPasswordForm.get('rePassword')?.errors && (editPasswordForm.get('rePassword')?.touched)">
+                  <p class="text-danger small" *ngIf="editPasswordForm.get('rePassword')?.getError('required')"><i
+                      class="fas fa-warning"></i> Repassword is required</p>
+                  <p class="text-danger small" *ngIf="editPasswordForm.get('rePassword')?.getError('misMatch')"><i
+                      class="fas fa-warning"></i> Not equal to Password</p>
+                </div>
+              </div>
+              <input type="password" id="rePassword" formControlName="rePassword" class="form-control">
+            </div>
+            <div class="my-3 d-flex justify-content-between align-items-center">
+              <p class="text-danger flex-grow-1" *ngIf="msgErr">{{msgErr}}</p>
+              <button [disabled]="editPasswordForm.invalid" class="main-btn d-block ms-auto"><i *ngIf="isLoading"
+                  class="fas fa-spinner fa-spin"></i> Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

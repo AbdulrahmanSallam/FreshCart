@@ -1,0 +1,47 @@
+<section class="my-3" *ngIf="cartData.numOfCartItems;else empty">
+  <div class="bg-main-light w-100 p-4 rounded-3">
+    <div class="heading">
+      <h1 class="h5 text-uppercase text-center fw-bolder">shop cart</h1>
+      <p class="text-main" *ngIf="cartData.data.totalCartPrice">Total Price : {{cartData.data.totalCartPrice}}</p>
+    </div>
+    <div class="row g-0 my-1 py-3 align-items-center border-bottom" *ngFor="let item of cartData.data.products">
+      <div class=" col-sm-3 col-md-2 col-lg-1">
+        <div class="px-5 px-sm-0">
+          <img [src]="item.product.imageCover" [alt]="item.product" class="img-fluid d-block">
+        </div>
+      </div>
+      <div class=" col-sm-9 col-md-10 col-lg-11">
+        <div class="d-flex justify-content-between align-items-center pt-4 pt-sm-0 ps-4">
+          <div>
+            <h2 class="h6 m-0 p-0">{{item.product.title}}</h2>
+            <p class="text-main my-2"> Price : {{item.price}}</p>
+            <button class="main-btn" (click)="removeProduct(item.product.id)">Remove <i
+                class="fas fa-trash-can"></i></button>
+          </div>
+          <div class="d-flex align-items-center">
+            <button #btn1 (click)="updateProductQuantity(item.product.id,item.count +1,btn1, btn2)"
+              class="btn border border-success">+</button>
+            <span class="mx-2">{{item.count}}</span>
+            <button #btn2 (click)="updateProductQuantity(item.product.id,item.count -1,btn1, btn2)"
+              class="btn border border-success">-</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between flex-wrap gap-2 align-items-center mt-3">
+      <div>
+        <button [routerLink]="['/checkout',cartData.data._id]" class="main-btn">Online Payment <img
+            src="./assets/images/visa-1.svg" style="width: 25px;" alt=""></button>
+      </div>
+      <div>
+        <button class="main-btn" (click)="clearCart()"> Clear all <i class="fas fa-trash text-warning "></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+<ng-template #empty>
+  <h2 class=" fw-bolder my-5 text-center ">
+    Your cart is empty
+  </h2>
+</ng-template>

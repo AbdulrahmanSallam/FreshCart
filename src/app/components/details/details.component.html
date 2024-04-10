@@ -1,0 +1,46 @@
+<section *ngIf="productInfo.id" class="middle-page">
+  <div class="w-100">
+    <div class="row g-4 align-items-center mx-2">
+      <div class="col-md-4 col-lg-3 px-5 px-sm-3">
+        <div>
+          <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let image of productInfo.images">
+              <ng-template carouselSlide>
+                <img [src]="image" class="w-100 d-block" [alt]="productInfo.title">
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-9">
+        <div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <h1 class="h5">{{productInfo.title}}</h1>
+              <span style="font-size: 30px;">
+                <i *ngIf="!inWishlist(productInfo.id)" (click)="addToWishlist(productInfo.id)"
+                  class="fas cursor-pointer fa-heart"></i>
+                <i *ngIf="inWishlist(productInfo.id)" (click)="removeFromWishlist(productInfo.id)"
+                  class="fas cursor-pointer fa-heart  text-main"></i></span>
+            </div>
+            <p class="ps-3 mb-3 text-muted">{{productInfo.description}}</p>
+            <span>{{productInfo.category.name}}</span>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span>{{productInfo.price|currency:"LE "}}</span>
+              <div class="d-flex gap-3 align-items-center ">
+                <div>
+                  <i [class.text-warning]="productInfo.ratingsAverage >= n" *ngFor="let n of [1,2,3,4,5]"
+                    class="fas fa-star"></i>
+                </div>
+                <span>{{productInfo.ratingsAverage}}</span>
+              </div>
+            </div>
+            <button class="main-btn d-block w-100 mt-2" (click)="addToCart(productInfo.id)">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
